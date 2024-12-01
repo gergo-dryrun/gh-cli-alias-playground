@@ -47,8 +47,8 @@ gh start-work PROJ-101 chore
 When you run this command, it will:
 
 1. Create a new branch named `<ISSUE_TYPE>/<JIRA_TICKET>`
-2. Create a `.changes.md` file with the branch name as the title
-3. Commit the `.changes.md` file
+2. Append a new section to `.changes.md` with the branch name as the title
+3. Commit the updated `.changes.md` file
 4. Push the branch to the remote repository
 5. Create a pull request with:
    - Title: Branch name

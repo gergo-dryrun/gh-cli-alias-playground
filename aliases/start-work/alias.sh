@@ -30,7 +30,7 @@ gh alias set --clobber start-work '!f() { \
   REPO=$(git config --get remote.origin.url | sed "s/.*github.com[:/]\(.*\)\.git/\1/"); \
   BRANCH_NAME="${ISSUE_TYPE}/${JIRA_TICKET// /_}"; \
   git checkout -b "$BRANCH_NAME" && \
-  echo "# ${BRANCH_NAME}" > .changes.md && \
+  echo -e "\n# ${BRANCH_NAME}" >> .changes.md && \
   git add .changes.md && \
   git commit -m "chore: initialize ${BRANCH_NAME}" && \
   git push -u origin "$BRANCH_NAME" && \
