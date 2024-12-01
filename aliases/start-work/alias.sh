@@ -9,7 +9,7 @@ gh alias set --clobber start-work '!f() { \
     echo "Arguments:"; \
     echo "  JIRA_TICKET    Required. The Jira ticket number/ID"; \
     echo "  ISSUE_TYPE     Optional. Type of issue (default: feature)"; \
-    echo "                 Valid values: feature, bug, maintenance"; \
+    echo "                 Valid values: feature, bug, maintenance, chore"; \
     echo ""; \
     echo "Options:"; \
     echo "  --help         Show this help message"; \
@@ -18,8 +18,8 @@ gh alias set --clobber start-work '!f() { \
   JIRA_TICKET="$1"; \
   ISSUE_TYPE=${2:-feature}; \
   if [[ -z "$JIRA_TICKET" ]]; then echo "Error: JIRA_TICKET_NUMBER is required"; exit 1; fi; \
-  if [[ ! "$ISSUE_TYPE" =~ ^(feature|bug|maintenance)$ ]]; then \
-    echo "Error: ISSUE_TYPE must be feature, bug, or maintenance"; \
+  if [[ ! "$ISSUE_TYPE" =~ ^(feature|bug|maintenance|chore)$ ]]; then \
+    echo "Error: ISSUE_TYPE must be feature, bug, maintenance, or chore"; \
     exit 1; \
   fi; \
   if ! git remote get-url origin >/dev/null 2>&1; then \
