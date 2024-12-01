@@ -19,6 +19,13 @@ jobs:
         echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
         sudo apt update
         sudo apt install gh
+
+    - name: Make scripts executable
+      run: |
+        chmod +x scripts/*.sh
+        chmod +x tests/integration/*.sh
+        chmod +x tests/utils/*.sh
+        chmod +x aliases/*/*.sh
     
     - name: Install aliases
       run: ./scripts/install-aliases.sh
