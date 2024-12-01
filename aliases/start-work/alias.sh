@@ -34,5 +34,5 @@ gh alias set --clobber start-work '!f() { \
   git add .changes.md && \
   git commit -m "chore: initialize ${BRANCH_NAME}" && \
   git push -u origin "$BRANCH_NAME" && \
-  gh pr create --repo "$REPO" --title "$BRANCH_NAME" --body "Work started on $BRANCH_NAME" --base main; \
+  gh pr create --repo "$REPO" --title "$BRANCH_NAME" --body "Work started on $BRANCH_NAME" --base main --draft; \
 }; f "$@"' 
