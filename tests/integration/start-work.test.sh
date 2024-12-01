@@ -28,6 +28,7 @@ test_start_work_creates_branch() {
 
 # Run all tests
 run_tests() {
+    echo "Running start-work tests"
     # test_start_work_help
     # test_start_work_invalid_type
     # test_start_work_creates_branch
