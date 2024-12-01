@@ -62,17 +62,18 @@ run_command() {
     stdout=$(cat "$stdout_file")
     stderr=$(cat "$stderr_file")
     
+    # Debug output
+    echo "=== Command Debug ===" >&2
+    echo "Command: $*" >&2
+    echo "Exit status: $status" >&2
+    echo "stderr: $stderr" >&2
+    echo "===================" >&2
+    
     # Cleanup
     rm -f "$stdout_file" "$stderr_file"
     
-    # Return results
-    echo "=== Command Output ==="
-    echo "Command: $*"
-    echo "Exit status: $status"
-    echo "stdout: $stdout"
-    echo "stderr: $stderr"
-    echo "===================="
-    
+    # Output just stdout for capture
+    echo "$stdout"
     return $status
 }
 

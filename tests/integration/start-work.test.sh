@@ -21,7 +21,7 @@ test_start_work_help() {
     status=$?
     
     assert_equals 0 "$status" "Help command should exit with 0"
-    first_line=$(echo "$output" | grep "Usage:" | head -n1)
+    first_line=$(echo "$output" | head -n1)
     assert_equals "Usage: gh start-work <JIRA_TICKET> [ISSUE_TYPE]" "$first_line" "Help message should show usage"
 }
 
@@ -32,8 +32,7 @@ test_start_work_invalid_type() {
     status=$?
     
     assert_equals 1 "$status" "Invalid type should exit with 1"
-    error_msg=$(echo "$output" | grep "Error:" | head -n1)
-    assert_equals "Error: ISSUE_TYPE must be feature, bug, maintenance, or chore" "$error_msg" "Should show error for invalid type"
+    assert_equals "Error: ISSUE_TYPE must be feature, bug, maintenance, or chore" "$output" "Should show error for invalid type"
 }
 
 # Run all tests
