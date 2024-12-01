@@ -41,7 +41,7 @@ run_tests() {
     if [ -n "$GITHUB_ACTIONS" ]; then
         echo "Skipping integration tests in GitHub Actions environment"
         return 0
-    }
+    fi
 
     echo "\n=== Running start-work tests ==="
     echo "Verifying gh CLI installation..."
