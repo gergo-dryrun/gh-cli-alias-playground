@@ -50,7 +50,7 @@ When you run this command, it will:
 2. Append a new section to `.changes.md` with the branch name as the title
 3. Commit the updated `.changes.md` file
 4. Push the branch to the remote repository
-5. Create a pull request with:
+5. Create a pull request in DRAFT state with:
    - Title: Branch name
    - Body: "Work started on <branch_name>"
    - Base branch: main
