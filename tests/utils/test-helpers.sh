@@ -9,7 +9,18 @@ echo "=== Test Helper Debug Info ==="
 echo "Shell: $SHELL"
 echo "PWD: $(pwd)"
 echo "PATH: $PATH"
+echo "Shell version:"
+sh --version 2>&1 || echo "sh version not available"
 echo "=========================="
+
+# Error handling
+handle_error() {
+    echo "ERROR: $1"
+    echo "Command: $2"
+    echo "Exit status: $3"
+    echo "Output: $4"
+    echo "stderr: $5"
+}
 
 # Assert equals with better error messages
 assert_equals() {
@@ -34,6 +45,37 @@ assert_equals() {
     fi
 }
 
+# Run command and capture both stdout and stderr
+run_command() {
+    # Create temporary files for output
+    stdout_file=$(mktemp)
+    stderr_file=$(mktemp)
+    
+    # Run command and capture output
+    if "$@" > "$stdout_file" 2> "$stderr_file"; then
+        status=0
+    else
+        status=$?
+    fi
+    
+    # Read output
+    stdout=$(cat "$stdout_file")
+    stderr=$(cat "$stderr_file")
+    
+    # Cleanup
+    rm -f "$stdout_file" "$stderr_file"
+    
+    # Return results
+    echo "=== Command Output ==="
+    echo "Command: $*"
+    echo "Exit status: $status"
+    echo "stdout: $stdout"
+    echo "stderr: $stderr"
+    echo "===================="
+    
+    return $status
+}
+
 # Setup a temporary git repository for testing
 setup_git_repo() {
     echo "Setting up test git repository..."
@@ -46,7 +88,7 @@ setup_git_repo() {
     fi
     
     echo "Initializing git repository..."
-    if ! git init; then
+    if ! run_command git init; then
         echo "Failed to initialize git repository"
         exit 1
     fi

@@ -20,6 +20,8 @@ jobs:
         echo "PATH: $PATH"
         echo "Contents of current directory:"
         ls -la
+        echo "Shell version:"
+        sh --version || echo "sh version not available"
     
     - name: Install GitHub CLI
       run: |
@@ -41,7 +43,7 @@ jobs:
     - name: Install aliases
       run: |
         echo "Installing aliases..."
-        ./scripts/install-aliases.sh
+        ./scripts/install-aliases.sh 2>&1
         echo "Verifying gh aliases:"
         gh alias list
     
@@ -50,7 +52,8 @@ jobs:
         echo "Running tests..."
         for test_file in tests/integration/*.test.sh; do
           echo "\n=== Running test file: $test_file ==="
-          sh -x "$test_file"
+          # Run with -e to exit on error and capture both stdout and stderr
+          sh -ex "$test_file" 2>&1
           test_status=$?
           echo "Test exit status: $test_status"
           if [ $test_status -ne 0 ]; then
