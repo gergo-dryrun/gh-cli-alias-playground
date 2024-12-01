@@ -11,17 +11,17 @@ test_start_work_help() {
 
 test_start_work_invalid_type() {
     local output
-    output=$(gh start-work TICKET-123 invalid_type 2>&1)
+    output=$(gh start-work INTEGRATION_TEST-123 invalid_type 2>&1)
     assert_equals 1 $? "Invalid type should exit with 1"
-    assert_equals "Error: ISSUE_TYPE must be feature, bug, or maintenance" "$output" "Should show error for invalid type"
+    assert_equals "Error: ISSUE_TYPE must be feature, bug, maintenance, or chore" "$output" "Should show error for invalid type"
 }
 
 test_start_work_creates_branch() {
     local temp_dir=$(setup_git_repo)
     
-    gh start-work TICKET-123 feature
+    gh start-work INTEGRATION_TEST-123 feature
     local branch_name=$(git branch --show-current)
-    assert_equals "feature/TICKET-123" "$branch_name" "Should create correct branch name"
+    assert_equals "feature/INTEGRATION_TEST-123" "$branch_name" "Should create correct branch name"
     
     cleanup_git_repo "$temp_dir"
 }
@@ -29,8 +29,8 @@ test_start_work_creates_branch() {
 # Run all tests
 run_tests() {
     echo "Running start-work tests"
-    # test_start_work_help
-    # test_start_work_invalid_type
+    test_start_work_help
+    test_start_work_invalid_type
     # test_start_work_creates_branch
 }
 

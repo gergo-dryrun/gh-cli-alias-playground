@@ -28,7 +28,7 @@ setup_git_repo() {
     git init
     git config --global user.email "test@example.com"
     git config --global user.name "Test User"
-    git remote add origin "https://github.com/username/repo.git"
+    git remote add origin "https://github.com/gergo-dryrun/gh-cli-alias-integration-test-repo.git"
     echo "# Test Repo" > README.md
     git add README.md
     git commit -m "Initial commit"
